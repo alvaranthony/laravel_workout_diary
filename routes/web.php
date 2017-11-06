@@ -11,6 +11,13 @@
 |
 */
 
+/*
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.index');
 });
+*/
+
+Route::get('/', "PagesController@index");
+Route::get('/about', "PagesController@about");
+
+Route::resource('workouts', 'WorkoutsController');
