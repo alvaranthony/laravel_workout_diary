@@ -14,7 +14,7 @@ class AddWorkoutDateToWorkouts extends Migration
     public function up()
     {
         Schema::table('workouts', function($table){
-            $table->date('workout_date')->default('2015-10-10');
+            $table->date('workout_date');
         });
     }
 

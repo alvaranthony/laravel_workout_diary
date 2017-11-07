@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Workout;
-use Carbon\Carbon;
+use DateTime;
 
 class WorkoutsController extends Controller
 {
@@ -45,13 +45,14 @@ class WorkoutsController extends Controller
         ]);
         
         //Convert the date from datepicker into suitable format for SQL table
-        $dateformat = $request->input('date');
-        $dateformat = Carbon::parse($request->workout_date)->format('Y-m-d');
+        $date_from = $request->input('date');
+        $dateformat = DateTime::createFromFormat('m/d/Y', $date_from);
+        $date = $dateformat->format('Y-m-d');
          //Create new workout post
         $workout = new Workout;
         $workout->workout_title = $request->input('title');
         $workout->workout_body = $request->input('body');
-        $workout->workout_date = $dateformat;
+        $workout->workout_date = $date;
         $workout->save();
         
         return redirect('/workouts')->with('success', 'New workout added successfully!');
