@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Workout;
+use Carbon\Carbon;
 
 class WorkoutsController extends Controller
 {
@@ -39,13 +40,18 @@ class WorkoutsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'date' => 'required'
         ]);
         
-        //Create new workout post
+        //Convert the date from datepicker into suitable format for SQL table
+        $dateformat = $request->input('date');
+        $dateformat = Carbon::parse($request->workout_date)->format('Y-m-d');
+         //Create new workout post
         $workout = new Workout;
         $workout->workout_title = $request->input('title');
         $workout->workout_body = $request->input('body');
+        $workout->workout_date = $dateformat;
         $workout->save();
         
         return redirect('/workouts')->with('success', 'New workout added successfully!');

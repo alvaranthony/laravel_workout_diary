@@ -8,7 +8,8 @@
         <p>{!!$workout->workout_body!!}</p>
     </div>
     <hr>
-    <small>Date added: {{$workout->created_at}}</small>
+    <p><small><b>Date added:</b> {{$workout->created_at}}</small></p>
+    <p><small><b>Date workout was done:</b> {{$workout->workout_date}}</small></p>
     <hr>
     
     <script>

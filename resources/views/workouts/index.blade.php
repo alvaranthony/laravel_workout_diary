@@ -9,7 +9,7 @@
                 <h3><a href="/workouts/{{$workout->id}}">{{$workout->workout_title}}</a></h3>
                 <hr>
                 <p><b>Date added:</b> {{$workout->created_at}}</p>
-                <p><b>Date workout was done:</b></p>
+                <p><b>Date workout was done:</b> {{$workout->workout_date}}</p>
             </div>
         @endforeach
     @else
