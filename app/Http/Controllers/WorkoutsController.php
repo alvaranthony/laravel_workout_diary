@@ -59,7 +59,8 @@ class WorkoutsController extends Controller
      */
     public function show($id)
     {
-        
+        $workout = Workout::find($id);
+        return view('workouts.show')->with('workout', $workout);
     }
 
     /**
@@ -70,7 +71,8 @@ class WorkoutsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $workout = Workout::find($id);
+        return view('workouts.edit')->with('workout', $workout);
     }
 
     /**
@@ -82,7 +84,18 @@ class WorkoutsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        
+        //Update current workout
+        $workout = Workout::find($id);
+        $workout->workout_title = $request->input('title');
+        $workout->workout_body = $request->input('body');
+        $workout->save();
+        
+        return redirect('/workouts')->with('success', 'Workout updated successfully!');   
     }
 
     /**
@@ -93,6 +106,8 @@ class WorkoutsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteEntry = Workout::find($id);
+        $deleteEntry->delete();
+        return redirect ('/workouts')->with('info', 'Workout deleted successfully!');
     }
 }
