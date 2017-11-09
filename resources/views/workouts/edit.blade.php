@@ -12,6 +12,10 @@
             {{Form::label('body', 'Workout Body')}}
             {{Form::textArea('body', $workout->workout_body, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Workout Body Text'])}}
         </div>
+        <div class="form-group">
+            {{Form::label('date', 'Date workout was done')}}
+            {{Form::text('date', $workout->workout_date, ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd'])}}
+        </div>
         {{Form::hidden('_method', 'PUT')}}
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}

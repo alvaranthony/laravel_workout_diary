@@ -45,14 +45,17 @@ class WorkoutsController extends Controller
         ]);
         
         //Convert the date from datepicker into suitable format for SQL table
+        //if dateformat not changed in datepicker function already (see app.blade)
+        /*
         $date_from = $request->input('date');
         $dateformat = DateTime::createFromFormat('m/d/Y', $date_from);
         $date = $dateformat->format('Y-m-d');
+        */
          //Create new workout post
         $workout = new Workout;
         $workout->workout_title = $request->input('title');
         $workout->workout_body = $request->input('body');
-        $workout->workout_date = $date;
+        $workout->workout_date = $request->input('date');
         $workout->save();
         
         return redirect('/workouts')->with('success', 'New workout added successfully!');
@@ -93,13 +96,22 @@ class WorkoutsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'date' => 'required'
         ]);
         
+        //Convert the date from datepicker into suitable format for SQL table
+        //if dateformat not changed in datepicker function already (see app.blade)
+        /*
+        $date_from = $request->input('date');
+        $dateformat = DateTime::createFromFormat('m/d/Y', $date_from);
+        $date = $dateformat->format('Y-m-d');
+        */
         //Update current workout
         $workout = Workout::find($id);
         $workout->workout_title = $request->input('title');
         $workout->workout_body = $request->input('body');
+        $workout->workout_date = $request->input('date');
         $workout->save();
         
         return redirect('/workouts')->with('success', 'Workout updated successfully!');   

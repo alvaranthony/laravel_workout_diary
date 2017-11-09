@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             {{Form::label('date', 'Date workout was done')}}
-            {{Form::text('date', '', ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy'])}}
+            {{Form::text('date', '', ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd'])}}
         </div>
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}
