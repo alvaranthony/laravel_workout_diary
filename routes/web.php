@@ -21,3 +21,6 @@ Route::get('/', "PagesController@index");
 Route::get('/about', "PagesController@about");
 
 Route::resource('workouts', 'WorkoutsController');
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index');

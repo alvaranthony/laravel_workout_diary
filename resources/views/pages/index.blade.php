@@ -1,3 +1,6 @@
+<!-- Use custom css for CURRENT blade view -->
+
+
 <!-- THIS IS THE HOME PAGE OF THE APP -->
 @extends('layouts.app')
 

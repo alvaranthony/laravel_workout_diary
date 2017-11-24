@@ -5,19 +5,38 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Workout;
 use DateTime;
+use Auth;
 
 class WorkoutsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+     
     public function index()
     {
         //HETKEL AJUTISELT NAVBARIL, HILJEM AINULT KUVAMINE DASHBOARDIL SISSE LOGITUNA
+        //HETKELAHENDUS: REDIRECT DASHBOARDILE, kui minna /workouts
+        //TODO: eemaldada antud route 
+        
+        /*
         $workouts = Workout::orderBy('created_at', 'desc')->get();
         return view('workouts.index')->with('workouts', $workouts);
+        */
+        
+        return redirect('dashboard');
     }
 
     /**
@@ -27,7 +46,7 @@ class WorkoutsController extends Controller
      */
     public function create()
     {
-       return view('workouts.create');
+        return view('workouts.create');
     }
 
     /**
@@ -56,9 +75,10 @@ class WorkoutsController extends Controller
         $workout->workout_title = $request->input('title');
         $workout->workout_body = $request->input('body');
         $workout->workout_date = $request->input('date');
+        $workout->user_id = auth()->user()->id;
         $workout->save();
         
-        return redirect('/workouts')->with('success', 'New workout added successfully!');
+        return redirect('/dashboard')->with('success', 'New workout added successfully!');
     }
 
     /**
@@ -70,6 +90,11 @@ class WorkoutsController extends Controller
     public function show($id)
     {
         $workout = Workout::find($id);
+        
+        // Check for correct user
+        if(auth()->user()->id !== $workout->user_id){
+            return redirect('/dashboard')->with('error', 'You have no access to this page!');
+        }
         return view('workouts.show')->with('workout', $workout);
     }
 
@@ -82,6 +107,12 @@ class WorkoutsController extends Controller
     public function edit($id)
     {
         $workout = Workout::find($id);
+        
+        // Check for correct user
+        if(auth()->user()->id !== $workout->user_id){
+            return redirect('/dashboard')->with('error', 'You have no access to this page!');
+        }
+        
         return view('workouts.edit')->with('workout', $workout);
     }
 
@@ -114,7 +145,7 @@ class WorkoutsController extends Controller
         $workout->workout_date = $request->input('date');
         $workout->save();
         
-        return redirect('/workouts')->with('success', 'Workout updated successfully!');   
+        return redirect('/dashboard')->with('success', 'Workout updated successfully!');   
     }
 
     /**
@@ -126,7 +157,13 @@ class WorkoutsController extends Controller
     public function destroy($id)
     {
         $deleteEntry = Workout::find($id);
+        
+        // Check for correct user
+        if(auth()->user()->id !== $deleteEntry->user_id){
+            return redirect('/dashboard')->with('error', 'You have no access to this page!');
+        }
+        
         $deleteEntry->delete();
-        return redirect ('/workouts')->with('info', 'Workout deleted successfully!');
+        return redirect('/dashboard')->with('warning', 'Workout deleted successfully!');
     }
 }

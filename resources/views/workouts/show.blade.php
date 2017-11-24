@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/workouts" class="btn btn-default">Return</a>
+    <a href="/dashboard" class="btn btn-primary">Return</a>
     <h1>{{$workout->workout_title}}</h1>
     <div>
         <p>{!!$workout->workout_body!!}</p>
@@ -23,7 +23,7 @@
         }
     </script>
     
-    <a href="/workouts/{{$workout->id}}/edit" class="btn btn-default">Edit</a>
+    <a href="/workouts/{{$workout->id}}/edit" class="btn btn-success">Edit</a>
     {!!Form::open(['action' => ['WorkoutsController@destroy', $workout->id], 'method' => 'POST', 'class' => 'pull-right', 'onsubmit' => 'return confirmDelete()'])!!}
         {{Form::hidden('_method', 'DELETE')}}
         {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
