@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Workout;
+use App\Tag;
 use DateTime;
 use Auth;
 
@@ -46,7 +47,8 @@ class WorkoutsController extends Controller
      */
     public function create()
     {
-        return view('workouts.create');
+        $tags = Tag::pluck('name', 'id');
+        return view('workouts.create')->with('tagsList', $tags);
     }
 
     /**
@@ -77,6 +79,8 @@ class WorkoutsController extends Controller
         $workout->workout_date = $request->input('date');
         $workout->user_id = auth()->user()->id;
         $workout->save();
+        //Attach selected tags with the new workout
+        $workout->tags()->attach($request->input('tags'));
         
         return redirect('/dashboard')->with('success', 'New workout added successfully!');
     }
@@ -107,13 +111,15 @@ class WorkoutsController extends Controller
     public function edit($id)
     {
         $workout = Workout::find($id);
+        $tags = Tag::pluck('name', 'id');
+        $tags_related = $workout->tags()->allRelatedIds();
         
         // Check for correct user
         if(auth()->user()->id !== $workout->user_id){
             return redirect('/dashboard')->with('error', 'You have no access to this page!');
         }
         
-        return view('workouts.edit')->with('workout', $workout);
+        return view('workouts.edit')->with('workout', $workout)->with('tagsList', $tags)->with('tags_related', $tags_related);
     }
 
     /**
@@ -144,6 +150,7 @@ class WorkoutsController extends Controller
         $workout->workout_body = $request->input('body');
         $workout->workout_date = $request->input('date');
         $workout->save();
+        $workout->tags()->sync($request->input('tags'));
         
         return redirect('/dashboard')->with('success', 'Workout updated successfully!');   
     }

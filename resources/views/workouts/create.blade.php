@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Add a new workout!</h1>
+    <h1>Add new workout</h1>
     {!! Form::open(['action' => 'WorkoutsController@store', 'method' => 'POST']) !!}
         <div class="form-group">
             {{Form::label('title', 'Workout Title')}}
@@ -11,6 +11,10 @@
         <div class="form-group">
             {{Form::label('body', 'Workout Body')}}
             {{Form::textArea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Workout Body Text'])}}
+        </div>
+        <div class="form-group">
+            {{Form::label('tags', 'Tags')}}
+            {{Form::select('tags[]', $tagsList, null, ['class' => 'form-control select2', 'multiple'])}}
         </div>
         <div class="form-group">
             {{Form::label('date', 'Date workout was done')}}

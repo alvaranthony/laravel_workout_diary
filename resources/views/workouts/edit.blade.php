@@ -13,6 +13,10 @@
             {{Form::textArea('body', $workout->workout_body, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Workout Body Text'])}}
         </div>
         <div class="form-group">
+            {{Form::label('tags', 'Tags')}}
+            {{Form::select('tags[]', $tagsList, $tags_related, ['class' => 'form-control select2', 'multiple'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('date', 'Date workout was done')}}
             {{Form::text('date', $workout->workout_date, ['id' => 'datepicker', 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd'])}}
         </div>

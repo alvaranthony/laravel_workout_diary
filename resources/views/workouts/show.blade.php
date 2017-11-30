@@ -4,6 +4,11 @@
 @section('content')
     <a href="/dashboard" class="btn btn-primary">Return</a>
     <h1>{{$workout->workout_title}}</h1>
+    @unless($workout->tags->isEmpty())
+        @foreach($workout->tags as $tag)
+            {{$tag->name}}
+        @endforeach
+    @endunless
     <div>
         <p>{!!$workout->workout_body!!}</p>
     </div>

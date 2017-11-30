@@ -33,20 +33,29 @@
                     <table class="table table-bordered table-hover table-dark">
                         <thead>
                             <th>Workout Title</th>
+                            <th>Tags</th>
                             <th>Workout Date</th>
-                            <th></th>
                         </thead>
                         @foreach($workouts as $workout)
                             <tbody>
-                                <th><a href="/workouts/{{$workout->id}}">{{$workout->workout_title}}</a></th>
-                                <th>{{$workout->workout_date}}</th>
                                 <th>
+                                <a href="/workouts/{{$workout->id}}">{{$workout->workout_title}}</a><br>
+                                </th>
+                                <th>
+                                    @unless($workout->tags->isEmpty())
+                                        @foreach($workout->tags as $tag)
+                                            {{$tag->name}}
+                                        @endforeach
+                                    @endunless
+                                </th>
+                                <!--<th>
                                     <a href="/workouts/{{$workout->id}}/edit" class="btn btn-success">Edit</a>
                                     {!!Form::open(['action' => ['WorkoutsController@destroy', $workout->id], 'method' => 'POST', 'class' => 'pull-right', 'onsubmit' => 'return confirmDelete()'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                     {!!Form::close()!!}
-                                </th>
+                                </th>-->
+                                <th>{{$workout->workout_date}}</th>
                             </tbody>
                         @endforeach
                     </table>

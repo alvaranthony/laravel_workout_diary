@@ -1,3 +1,4 @@
+https://laracasts.com/series/laravel-5-fundamentals/episodes/22?autoplay=true
 #loob uue git repository sellesse kausta kus asud
 git init
 
