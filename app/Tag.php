@@ -15,4 +15,8 @@ class Tag extends Model
     public function workouts(){
         return $this->belongsToMany('App\Workout');
     }
+    
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

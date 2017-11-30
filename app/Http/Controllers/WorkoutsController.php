@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Workout;
 use App\Tag;
+use App\User;
 use DateTime;
 use Auth;
 
@@ -47,7 +48,8 @@ class WorkoutsController extends Controller
      */
     public function create()
     {
-        $tags = Tag::pluck('name', 'id');
+        $user_id = auth()->user()->id;
+        $tags = Tag::where('user_id', $user_id)->pluck('name', 'id');
         return view('workouts.create')->with('tagsList', $tags);
     }
 
@@ -111,7 +113,8 @@ class WorkoutsController extends Controller
     public function edit($id)
     {
         $workout = Workout::find($id);
-        $tags = Tag::pluck('name', 'id');
+        $user_id = auth()->user()->id;
+        $tags = Tag::where('user_id', $user_id)->pluck('name', 'id');
         $tags_related = $workout->tags()->allRelatedIds();
         
         // Check for correct user

@@ -17,10 +17,18 @@ Route::get('/', function () {
 });
 */
 
+// Controllers for about and main page
 Route::get('/', "PagesController@index");
 Route::get('/about', "PagesController@about");
 
+//Controllers for pages related with workouts 
 Route::resource('workouts', 'WorkoutsController');
+
+//Authentication controller
 Auth::routes();
 
+//Controller for dashboard
 Route::get('/dashboard', 'DashboardController@index');
+
+//Controller for tags
+Route::get('/tags', 'TagsController@index');

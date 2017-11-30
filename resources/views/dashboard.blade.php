@@ -25,12 +25,12 @@
                 @endif
                 <a href="workouts/create" class="btn btn-primary">+ Add workout</a>
                 @if ($count > 0)
-                    <h3>Total days of workouts done: {{$count}}</h3>
+                    <h3>Total days of workouts finished: {{$count}}</h3>
                 @endif
                 
                 <h3>My workouts</h3>
                 @if (count($workouts) > 0)
-                    <table class="table table-bordered table-hover table-dark">
+                    <table class="table table-hover table-dark">
                         <thead>
                             <th>Workout Title</th>
                             <th>Tags</th>

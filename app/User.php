@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function workouts(){
         return $this->hasMany('App\Workout');
     }
+    
+    public function tags(){
+        return $this->hasMany('App\Tag');
+    }
 }
