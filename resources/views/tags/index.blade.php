@@ -15,8 +15,21 @@
 
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Tags board</div>
-
+            <div class="panel-heading"><h4>Add new tag</h4></div>
+            <div class="panel-body">
+                {!! Form::open(['action' => 'TagsController@store', 'method' => 'POST']) !!}
+                    <div class="form-group">
+                        {{Form::label('name', 'Tag name')}}
+                        {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name of the tag'])}}
+                    </div>
+                    <div class="btn-toolbar">
+                        {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+                    </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Tags board</h4></div>
             <div class="panel-body">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -31,11 +44,17 @@
                         @foreach($tags as $tag)
                             <tbody>
                                 <th>{{$tag->name}}</th>
+                                <th>
+                                    {!!Form::open(['action' => ['TagsController@destroy', $tag->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                    {!!Form::close()!!}
+                                </th>
                             </tbody>
                         @endforeach
                     </table>
                 @else
-                    <p>No tags found!</p>
+                    <p>No tags added!</p>
                 @endif
             </div>
         </div>

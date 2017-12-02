@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="panel panel-default">
-            <div class="panel-heading">Dashboard</div>
+            <div class="panel-heading"><h4>Dashboard</h4></div>
 
             <div class="panel-body">
                 @if (session('status'))
@@ -23,12 +23,13 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <a href="workouts/create" class="btn btn-primary">+ Add workout</a>
+                <div class="btn-toolbar">
+                    <a href="workouts/create" class="btn btn-primary">+ Add workout</a>
+                </div>
                 @if ($count > 0)
                     <h3>Total days of workouts finished: {{$count}}</h3>
                 @endif
-                
-                <h3>My workouts</h3>
+            
                 @if (count($workouts) > 0)
                     <table class="table table-hover table-dark">
                         <thead>

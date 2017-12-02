@@ -28,11 +28,29 @@ class TagsController extends Controller
         return view('tags.index')->with('tags', $user->tags);
     }
     
-    public function store(){
+    public function store(Request $request){
         
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        
+        $tag = new Tag; 
+        $tag->name = $request->input('name');
+        $tag->user_id = auth()->user()->id;
+        $tag->save();
+        
+        return redirect('/tags')->with('success', 'New tag added successfully!');
     }
     
-    public function delete(){
+    public function destroy($id){
+        $deleteTag = Tag::find($id);
         
+        // Check for correct user
+        if(auth()->user()->id !== $deleteTag->user_id){
+            return redirect('/dashboard')->with('error', 'You have no access to this page!');
+        }
+        
+        $deleteTag->delete();
+        return redirect('/tags')->with('warning', 'Tag deleted successfully!');
     }
 }
