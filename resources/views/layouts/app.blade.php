@@ -13,8 +13,11 @@
     <!-- Styles -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tag.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app_custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-3.min.css') }}" rel="stylesheet">
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />-->
 </head>
 <body>
     <div id="app">

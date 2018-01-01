@@ -29,6 +29,7 @@ Auth::routes();
 
 //Controller for dashboard
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard/{tag}', 'DashboardController@index_tag');
 
 //Controller for tags
 Route::resource('tags', 'TagsController');

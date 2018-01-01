@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="panel panel-default">
-    <div class="panel-heading"><h4>Add new workout</h4></div>
+    <div class="panel-heading"><h4 style="color: white; text-align:center;"><b>ADD NEW WORKOUT</b></h4></div>
     <div class="panel-body">
         {!! Form::open(['action' => 'WorkoutsController@store', 'method' => 'POST']) !!}
             <div class="form-group">

@@ -1,0 +1,34 @@
+.tag-box {
+    border-radius: 4px;
+    padding: 0px 5px;
+    margin: 5px 0px;
+    display: inline-block;
+    background-color: #0084b4;
+}
+
+.tag-box:hover{
+    background-color: #00aced;
+}
+
+.tag-box_indv{
+    border-radius: 4px;
+    padding: 0px 5px;
+    margin: 5px 0px;
+    display: inline-block;
+    background-color: #0084b4;
+}
+
+.tag-box_indv:hover{
+    background-color: #00aced;
+}
+
+.tag-delete{
+    background: none; 
+    border: none; 
+    color: white;
+}
+
+.tag-delete:hover{
+    color: red;
+}
+

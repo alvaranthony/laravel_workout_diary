@@ -3,11 +3,11 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading"><h4>{{$workout->workout_title}}</h4></div>
+        <div class="panel-heading"><h4 style="text-align:center;">{{$workout->workout_title}}</h4></div>
         <div class="panel-body">
             @unless($workout->tags->isEmpty())
                 @foreach($workout->tags as $tag)
-                    {{$tag->name}}
+                    <a href="/dashboard/{{$tag->id}}"><div class="tag-box"><font color="white"><b>{{$tag->name}}</b></font></div></a>
                 @endforeach
             @endunless
             <div>
@@ -32,7 +32,7 @@
             </script>
             
             <div class="btn-toolbar">
-                <a href="/dashboard" class="btn btn-primary">Return</a>
+                <a href="/dashboard" class="btn btn-default">Return</a>
                 <a href="/workouts/{{$workout->id}}/edit" class="btn btn-success pull-right">Edit</a>
                 {!!Form::open(['action' => ['WorkoutsController@destroy', $workout->id], 'method' => 'POST', 'class' => 'pull-right', 'onsubmit' => 'return confirmDelete()'])!!}
                     {{Form::hidden('_method', 'DELETE')}}

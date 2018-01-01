@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading"><h4>Edit workout</h4></div>
+        <div class="panel-heading"><h4 style="text-align:center;">EDIT WORKOUT</h4></div>
         <div class="panel-body">
         {!! Form::open(['action' => ['WorkoutsController@update', $workout->id], 'method' => 'POST']) !!}
             <div class="form-group">

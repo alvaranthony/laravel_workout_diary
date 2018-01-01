@@ -1,0 +1,12 @@
+.workout-delete_min{
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1em;
+}
+
+.workout-delete_min:hover{
+    background: red;
+    color: white;
+    border-radius: 20px;
+}
